@@ -1,0 +1,192 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Query {
+  """Get user by id"""
+  getUser(id: String!): UserSchema!
+
+  """Get all users"""
+  getUsers: [UserSchema!]!
+
+  """Get card by id"""
+  getCardById(id: String!): CardSchema!
+
+  """Get cards user id"""
+  getCardsByUserId(userId: String!): [CardSchema!]!
+}
+
+"""User schema"""
+type UserSchema {
+  """Id"""
+  id: ID!
+
+  """Created at timestamp"""
+  createdAt: DateTime!
+
+  """User first name"""
+  firstName: String!
+
+  """User last name"""
+  lastName: String!
+
+  """User email"""
+  email: String!
+
+  """User age"""
+  age: Float!
+
+  """User status"""
+  status: UserStatus!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""User status enum"""
+enum UserStatus {
+  """User is in active state"""
+  Active
+
+  """User is in pending state"""
+  Pending
+
+  """User is in suspended state"""
+  Suspended
+
+  """User is in deleted state"""
+  Deleted
+}
+
+"""Card schema"""
+type CardSchema {
+  """Id"""
+  id: ID!
+
+  """Created at timestamp"""
+  createdAt: DateTime!
+
+  """Category of the card"""
+  category: CardCategory!
+
+  """Nick name on the card"""
+  nickName: String!
+
+  """Last four digits of the card"""
+  lastFour: Float!
+
+  """Status of the card"""
+  status: CardStatus!
+
+  """Expiry of the card"""
+  expiry: String!
+
+  """User details"""
+  user: User!
+}
+
+"""Card category enum"""
+enum CardCategory {
+  """Physical card"""
+  physical
+
+  """Virtual card"""
+  Virtual
+}
+
+"""Card status enum"""
+enum CardStatus {
+  """Card is active"""
+  Active
+
+  """Card is closed"""
+  Closed
+}
+
+type User {
+  """Id"""
+  id: ID!
+
+  """Created at timestamp"""
+  createdAt: DateTime!
+
+  """Updated at timestamp"""
+  updatedAt: String!
+
+  """User first name"""
+  firstName: String!
+
+  """User last name"""
+  lastName: String!
+
+  """User email"""
+  email: String!
+
+  """User age"""
+  age: Float!
+
+  """User status"""
+  status: UserStatus!
+}
+
+type Mutation {
+  """Create user"""
+  createUser(data: CreateUserInput!): CreateUserSchema!
+
+  """Create card for user"""
+  createCard(data: CreateCardInput!): CreateCardSchema!
+}
+
+"""Create user schema"""
+type CreateUserSchema {
+  """Id"""
+  id: ID!
+
+  """User first name"""
+  firstName: String!
+
+  """User last name"""
+  lastName: String!
+
+  """User status"""
+  status: UserStatus!
+}
+
+input CreateUserInput {
+  """User first name"""
+  firstName: String!
+
+  """User last name"""
+  lastName: String!
+
+  """User age"""
+  age: Float!
+
+  """User email"""
+  email: String!
+}
+
+"""Create Card schema"""
+type CreateCardSchema {
+  """Id"""
+  id: ID!
+
+  """Nick name on the card"""
+  nickName: String!
+
+  """Last four digits of the card"""
+  lastFour: Float!
+
+  """Expiry of the card"""
+  expiry: String!
+}
+
+input CreateCardInput {
+  """User id for the card"""
+  userId: String!
+
+  """Nick name for the card"""
+  nickName: String!
+}
